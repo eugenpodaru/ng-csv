@@ -53,6 +53,7 @@ ngCsv attributes
   <button type="button" ng-csv="getArray()" csv-header="['Field A', 'Field B', 'Field C']" filename="test.csv">Export</button>
   ```
 
+* csv-column-order: Defines the column order to be set when creating the body of the CSV (may be according to the csv-headers) - use it when you have an array of objects.
 * field-separator: Defines the field separator character (default is ,)
 * decimal-separator: Defines the decimal separator character (default is .). If set to "locale", it uses the [language sensitive representation of the number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toLocaleString).
 * text-delimiter: If provided, will use this characters to "escape" fields, otherwise will use double quotes as deafult
@@ -60,7 +61,7 @@ ngCsv attributes
 * lazy-load: If defined and set to true, ngCsv will generate the data string only on demand. See the lazy_load example for more details.
 * add-bom: Add the Byte Order Mark, use this option if you are getting an unexpected char when opening the file on any windows App.
 * charset: Defines the charset of the downloadable Csv file. Default is "utf-8".
-
+* csv-label: Defines whether or not using keys as csv column value (default is false).
 ## Examples
 You can check out this live example here: https://asafdav.github.io/ng-csv/example/
 

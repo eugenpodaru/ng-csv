@@ -12,6 +12,7 @@ angular.module('ngCsv.directives').
         data: '&ngCsv',
         filename: '@filename',
         header: '&csvHeader',
+        columnOrder: '&csvColumnOrder',
         txtDelim: '@textDelimiter',
         decimalSep: '@decimalSeparator',
         quoteStrings: '@quoteStrings',
@@ -20,7 +21,8 @@ angular.module('ngCsv.directives').
         addByteOrderMarker: "@addBom",
         addSeparator: "@addSep",
         ngClick: '&',
-        charset: '@charset'
+        charset: '@charset',
+        label: '&csvLabel'
       },
       controller: [
         '$scope',
@@ -52,7 +54,8 @@ angular.module('ngCsv.directives').
               charset: $scope.charset
             };
             if (angular.isDefined($attrs.csvHeader)) options.header = $scope.$eval($scope.header);
-
+            if (angular.isDefined($attrs.csvColumnOrder)) options.columnOrder = $scope.$eval($scope.columnOrder);
+            if (angular.isDefined($attrs.csvLabel)) options.label = $scope.$eval($scope.label);
             options.fieldSep = $scope.fieldSep ? $scope.fieldSep : ",";
 
             // Replaces any badly formatted special character string with correct special character
@@ -92,12 +95,13 @@ angular.module('ngCsv.directives').
             navigator.msSaveBlob(blob, scope.getFilename());
           } else {
 
-            var downloadLink = angular.element('<a></a>');
+            var downloadContainer = angular.element('<div data-tap-disabled="true"><a></a></div>');
+            var downloadLink = angular.element(downloadContainer.children()[0]);
             downloadLink.attr('href', window.URL.createObjectURL(blob));
             downloadLink.attr('download', scope.getFilename());
             downloadLink.attr('target', '_blank');
 
-            $document.find('body').append(downloadLink);
+            $document.find('body').append(downloadContainer);
             $timeout(function () {
               downloadLink[0].click();
               downloadLink.remove();

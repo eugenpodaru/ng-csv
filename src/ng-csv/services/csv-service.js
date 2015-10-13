@@ -104,14 +104,28 @@ angular.module('ngCsv.services').
           arrData = responseData();
         }
 
+        // Check if using keys as labels
+        if (angular.isDefined(options.label) && options.label && typeof options.label === 'boolean') {
+            var labelArray, labelString;
+
+            labelArray = [];
+            angular.forEach(arrData[0], function(value, label) {
+                this.push(that.stringifyField(label, options));
+            }, labelArray);
+            labelString = labelArray.join(options.fieldSep ? options.fieldSep : ",");
+            csvContent += labelString + EOL;
+        }
+
         angular.forEach(arrData, function (oldRow, index) {
           var row = angular.copy(arrData[index]);
           var dataString, infoArray;
 
           infoArray = [];
 
-          angular.forEach(row, function (field, key) {
-            this.push(that.stringifyField(field, options));
+          var iterator = !!options.columnOrder ? options.columnOrder : row;
+          angular.forEach(iterator, function (field, key) {
+            var val = !!options.columnOrder ? row[field] : field;
+            this.push(that.stringifyField(val, options));
           }, infoArray);
 
           dataString = infoArray.join(options.fieldSep ? options.fieldSep : ",");
