@@ -3,30 +3,29 @@
 // before all nested files are concatenated by Grunt
 
 // Config
-angular.module('ngCsv.config', []).
-  value('ngCsv.config', {
-      debug: true
-  }).
-  config(['$compileProvider', function($compileProvider){
-    if (angular.isDefined($compileProvider.urlSanitizationWhitelist)) {
-      $compileProvider.urlSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|data):/);
-    } else {
-      $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|data):/);
-    }
-  }]);
+angular
+    .module('ngCsv.config', [])
+    .value('ngCsv.config', { debug: true })
+    .config(['$compileProvider', function ($compileProvider) {
+        if (angular.isDefined($compileProvider.urlSanitizationWhitelist)) {
+            $compileProvider.urlSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|data):/);
+        } else {
+            $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|data):/);
+        }
+    }]);
 
 // Modules
 angular.module('ngCsv.directives', ['ngCsv.services']);
 angular.module('ngCsv.services', []);
 angular.module('ngCsv',
     [
-        'ngCsv.config',
-        'ngCsv.services',
-        'ngCsv.directives',
-        'ngSanitize'
-    ]);
+    'ngCsv.config',
+    'ngCsv.services',
+    'ngCsv.directives',
+    'ngSanitize'
+]);
 
 // Common.js package manager support (e.g. ComponentJS, WebPack)
 if (typeof module !== 'undefined' && typeof exports !== 'undefined' && module.exports === exports) {
-  module.exports = 'ngCsv';
+    module.exports = 'ngCsv';
 }
