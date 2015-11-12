@@ -63,9 +63,9 @@ angular.module('ngCsv.services').
             }
             
             if (typeof data === 'string') {
-                data = data.replace(/"/g, '""'); // Escape double quotes
+                data = data.replace(options.txtDelim, options.txtDelim + options.txtDelim); // Escape txtDelimiter
                 
-                if (options.quoteStrings || data.indexOf(',') > -1 || data.indexOf('\n') > -1 || data.indexOf('\r') > -1) {
+                if (options.quoteStrings || data.indexOf(options.fieldSep) > -1 || data.indexOf('\n') > -1 || data.indexOf('\r') > -1) {
                     data = options.txtDelim + data + options.txtDelim;
                 }
                 
