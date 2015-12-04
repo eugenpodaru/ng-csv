@@ -123,17 +123,21 @@ angular.module('ngCsv.services').
                     csvContent += index < arrData.length ? dataString + EOL : dataString;
                 });
                 
-                //deal with the character set
-                options.charset = options.charset || "utf-8";
-                options.charset = options.charset.toLowerCase();
-                if (options.charset === "utf-16") {
-                    csv = that.utf16Encode(csvContent, options.addByteOrderMarker);
-                } else if (options.charset === "utf-16le") {
-                    csv = that.utf16leEncode(csvContent, options.addByteOrderMarker);
-                } else if (options.charset === "utf-16be") {
-                    csv = that.utf16beEncode(csvContent, options.addByteOrderMarker);
+                if (options.encode) {
+                    //deal with the character set
+                    options.charset = options.charset || "utf-8";
+                    options.charset = options.charset.toLowerCase();
+                    if (options.charset === "utf-16") {
+                        csv = that.utf16Encode(csvContent, options.addByteOrderMarker);
+                    } else if (options.charset === "utf-16le") {
+                        csv = that.utf16leEncode(csvContent, options.addByteOrderMarker);
+                    } else if (options.charset === "utf-16be") {
+                        csv = that.utf16beEncode(csvContent, options.addByteOrderMarker);
+                    } else {
+                        csv = that.utf8Encode(csvContent, options.addByteOrderMarker);
+                    }
                 } else {
-                    csv = that.utf8Encode(csvContent, options.addByteOrderMarker);
+                    csv = csvContent;
                 }
                 
                 //resolve

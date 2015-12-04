@@ -156,17 +156,21 @@ angular.module('ngCsv.services').
                     csvContent += index < arrData.length ? dataString + EOL : dataString;
                 });
                 
-                //deal with the character set
-                options.charset = options.charset || "utf-8";
-                options.charset = options.charset.toLowerCase();
-                if (options.charset === "utf-16") {
-                    csv = that.utf16Encode(csvContent, options.addByteOrderMarker);
-                } else if (options.charset === "utf-16le") {
-                    csv = that.utf16leEncode(csvContent, options.addByteOrderMarker);
-                } else if (options.charset === "utf-16be") {
-                    csv = that.utf16beEncode(csvContent, options.addByteOrderMarker);
+                if (options.encode) {
+                    //deal with the character set
+                    options.charset = options.charset || "utf-8";
+                    options.charset = options.charset.toLowerCase();
+                    if (options.charset === "utf-16") {
+                        csv = that.utf16Encode(csvContent, options.addByteOrderMarker);
+                    } else if (options.charset === "utf-16le") {
+                        csv = that.utf16leEncode(csvContent, options.addByteOrderMarker);
+                    } else if (options.charset === "utf-16be") {
+                        csv = that.utf16beEncode(csvContent, options.addByteOrderMarker);
+                    } else {
+                        csv = that.utf8Encode(csvContent, options.addByteOrderMarker);
+                    }
                 } else {
-                    csv = that.utf8Encode(csvContent, options.addByteOrderMarker);
+                    csv = csvContent;
                 }
                 
                 //resolve
@@ -303,7 +307,8 @@ angular.module('ngCsv.directives').
                 quoteStrings: '@quoteStrings',
                 fieldSep: '@fieldSeparator',
                 lazyLoad: '@lazyLoad',
-                addByteOrderMarker: "@addBom",
+                addByteOrderMarker: '@addBom',
+                encode: '@encode',
                 ngClick: '&',
                 charset: '@charset',
                 label: '&csvLabel'
@@ -334,7 +339,8 @@ angular.module('ngCsv.directives').
                             decimalSep: $scope.decimalSep ? $scope.decimalSep : '.',
                             quoteStrings: $scope.quoteStrings,
                             addByteOrderMarker: $scope.addByteOrderMarker,
-                            charset: $scope.charset
+                            charset: $scope.charset,
+                            encode: $scope.encode
                         };
                         if (angular.isDefined($attrs.csvHeader)) options.header = $scope.$eval($scope.header);
                         if (angular.isDefined($attrs.csvColumnOrder)) options.columnOrder = $scope.$eval($scope.columnOrder);
@@ -361,6 +367,7 @@ angular.module('ngCsv.directives').
                             $element.removeClass($attrs.ngCsvLoadingClass || 'ng-csv-loading');
                             deferred.resolve(csv);
                         });
+                        
                         $scope.$apply(); // Old angular support
                         
                         return deferred.promise;

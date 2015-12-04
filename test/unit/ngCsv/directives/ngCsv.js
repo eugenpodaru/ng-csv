@@ -69,7 +69,7 @@ describe('ngCsv directive', function () {
         // Check that the compiled element contains the templated content
         expect(scope.$eval(scope.data)).toBe($rootScope.test);
         scope.buildCSV(scope.data).then(function () {
-            expect(scope.csv).toEqual(CSV.utf8Encode('1,2,3\r\n4,5,6\r\n'));
+            expect(scope.csv).toEqual('1,2,3\r\n4,5,6\r\n');
             done();
         });
         scope.$apply();
@@ -85,7 +85,7 @@ describe('ngCsv directive', function () {
         
         // Check that the compiled element contains the templated content
         scope.buildCSV(scope.data).then(function () {
-            expect(scope.csv).toEqual(CSV.utf8Encode('1,2,3\r\n4,5,6\r\n'));
+            expect(scope.csv).toEqual('1,2,3\r\n4,5,6\r\n');
             done();
         });
         scope.$apply();
@@ -103,7 +103,7 @@ describe('ngCsv directive', function () {
         // Check that the compiled element contains the templated content
         expect(scope.$eval(scope.data)).toEqual($rootScope.getTest());
         scope.buildCSV(scope.data).then(function () {
-            expect(scope.csv).toEqual(CSV.utf8Encode('1,2,3\r\n4,5,6\r\n'));
+            expect(scope.csv).toEqual('1,2,3\r\n4,5,6\r\n');
             done();
         });
         scope.$apply();
@@ -125,7 +125,7 @@ describe('ngCsv directive', function () {
         expect(scope.$eval(scope.header)).toEqual(['A', 'B', 'C']);
         
         scope.buildCSV(scope.data).then(function () {
-            expect(scope.csv).toEqual(CSV.utf8Encode('A,B,C\r\n1,2,3\r\n4,5,6\r\n'));
+            expect(scope.csv).toEqual('A,B,C\r\n1,2,3\r\n4,5,6\r\n');
             done();
         });
         scope.$apply();
@@ -146,7 +146,7 @@ describe('ngCsv directive', function () {
         
         
         scope.buildCSV(scope.data).then(function () {
-            expect(scope.csv).toEqual(CSV.utf8Encode('a,b,c\r\n1,2,3\r\n4,5,6\r\n'));
+            expect(scope.csv).toEqual('a,b,c\r\n1,2,3\r\n4,5,6\r\n');
             done();
         });
         scope.$apply();
@@ -167,7 +167,7 @@ describe('ngCsv directive', function () {
         expect(scope.$eval(scope.columnOrder)).toEqual($rootScope.order);
         
         scope.buildCSV(scope.data).then(function () {
-            expect(scope.csv).toEqual(CSV.utf8Encode('2,1,3\r\n5,4,6\r\n'));
+            expect(scope.csv).toEqual('2,1,3\r\n5,4,6\r\n');
             done();
         });
         scope.$apply();
@@ -188,7 +188,7 @@ describe('ngCsv directive', function () {
         expect(scope.$eval(scope.data)).toEqual($rootScope.testDelim);
         
         scope.buildCSV(scope.data).then(function () {
-            expect(scope.csv).toEqual(CSV.utf8Encode('1,"a",2\r\n"b","c",3\r\n'));
+            expect(scope.csv).toEqual('1,"a",2\r\n"b","c",3\r\n');
             done();
         });
         scope.$apply();
@@ -209,7 +209,7 @@ describe('ngCsv directive', function () {
         expect(scope.$eval(scope.data)).toEqual($rootScope.testDelim);
         
         scope.buildCSV(scope.data).then(function () {
-            expect(scope.csv).toEqual(CSV.utf8Encode('1,"a",2\r\n"b","c",3\r\n'));
+            expect(scope.csv).toEqual('1,"a",2\r\n"b","c",3\r\n');
             done();
         });
         scope.$apply();
@@ -225,7 +225,7 @@ describe('ngCsv directive', function () {
         
         // Check that the compiled element contains the templated content
         scope.buildCSV(scope.data).then(function () {
-            expect(scope.csv).toEqual(CSV.utf8Encode('1,2,3\r\n4,5,6\r\n', true));
+            expect(scope.csv).toEqual('1,2,3\r\n4,5,6\r\n', true);
             done();
         });
         scope.$apply();
@@ -246,7 +246,7 @@ describe('ngCsv directive', function () {
         expect(scope.$eval(scope.data)).toEqual($rootScope.testDelim);
         
         scope.buildCSV(scope.data).then(function () {
-            expect(scope.csv).toEqual(CSV.utf8Encode('1,"a,b",2\r\nb,c,3\r\n'));
+            expect(scope.csv).toEqual('1,"a,b",2\r\nb,c,3\r\n');
             done();
         });
         scope.$apply();
@@ -267,7 +267,7 @@ describe('ngCsv directive', function () {
         expect(scope.$eval(scope.data)).toEqual($rootScope.testDelim);
         
         scope.buildCSV(scope.data).then(function () {
-            expect(scope.csv).toEqual(CSV.utf8Encode('1,"a\nb",2\r\nb,c,3\r\n'));
+            expect(scope.csv).toEqual('1,"a\nb",2\r\nb,c,3\r\n');
             done();
         });
         scope.$apply();
@@ -288,7 +288,7 @@ describe('ngCsv directive', function () {
         expect(scope.$eval(scope.data)).toEqual($rootScope.testDelim);
         
         scope.buildCSV(scope.data).then(function () {
-            expect(scope.csv).toEqual(CSV.utf8Encode('1,a#b,2\r\nb,c,3\r\n'));
+            expect(scope.csv).toEqual('1,a#b,2\r\nb,c,3\r\n');
             done();
         });
         scope.$apply();
@@ -306,7 +306,7 @@ describe('ngCsv directive', function () {
         expect(scope.$eval(scope.data)).toEqual($rootScope.test);
         
         scope.buildCSV(scope.data).then(function () {
-            expect(scope.csv).toEqual(CSV.utf8Encode('1;2;3\r\n4;5;6\r\n'));
+            expect(scope.csv).toEqual('1;2;3\r\n4;5;6\r\n');
             done();
         });
         scope.$apply();
@@ -324,7 +324,7 @@ describe('ngCsv directive', function () {
         expect(scope.$eval(scope.data)).toEqual($rootScope.testObj);
         
         scope.buildCSV(scope.data).then(function () {
-            expect(scope.csv).toEqual(CSV.utf8Encode('1;2;3\r\n4;5;6\r\n'));
+            expect(scope.csv).toEqual('1;2;3\r\n4;5;6\r\n');
             done();
         });
         scope.$apply();
@@ -346,7 +346,7 @@ describe('ngCsv directive', function () {
         expect(scope.$eval(scope.data)).toEqual($rootScope.testObj);
         
         scope.buildCSV(scope.data).then(function () {
-            expect(scope.csv).toEqual(CSV.utf8Encode('1;2;3\r\n4;5;6\r\n'));
+            expect(scope.csv).toEqual('1;2;3\r\n4;5;6\r\n');
             done();
         });
         scope.$apply();
@@ -366,7 +366,7 @@ describe('ngCsv directive', function () {
         expect(scope.$eval(scope.data)).toEqual($rootScope.testObj);
         
         scope.buildCSV(scope.data).then(function () {
-            expect(scope.csv).toEqual(CSV.utf8Encode('1\t2\t3\r\n4\t5\t6\r\n'));
+            expect(scope.csv).toEqual('1\t2\t3\r\n4\t5\t6\r\n');
             done();
         });
         scope.$apply();
@@ -403,7 +403,7 @@ describe('ngCsv directive', function () {
         expect(scope.$eval(scope.data)).toEqual(undefined);
         
         scope.buildCSV(scope.data).then(function () {
-            expect(scope.csv).toEqual(CSV.utf8Encode(''));
+            expect(scope.csv).toEqual('');
             done();
         });
         scope.$apply();
@@ -485,7 +485,7 @@ describe('ngCsv directive', function () {
         scope.buildCSV(scope.data).then(function () {
             var locale = $rootScope.testDecimal[0][0].toLocaleString();
             
-            expect(scope.csv).toEqual(CSV.utf8Encode(locale + '\r\n'));
+            expect(scope.csv).toEqual(locale + '\r\n');
             done();
         });
         
@@ -507,7 +507,7 @@ describe('ngCsv directive', function () {
         expect(scope.decimalSep).toBe($rootScope.decSep);
         
         scope.buildCSV(scope.data).then(function () {
-            expect(scope.csv).toEqual(CSV.utf8Encode('13,37\r\n'));
+            expect(scope.csv).toEqual('13,37\r\n');
             done();
         });
         

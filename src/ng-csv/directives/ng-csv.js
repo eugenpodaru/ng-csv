@@ -18,7 +18,8 @@ angular.module('ngCsv.directives').
                 quoteStrings: '@quoteStrings',
                 fieldSep: '@fieldSeparator',
                 lazyLoad: '@lazyLoad',
-                addByteOrderMarker: "@addBom",
+                addByteOrderMarker: '@addBom',
+                encode: '@encode',
                 ngClick: '&',
                 charset: '@charset',
                 label: '&csvLabel'
@@ -49,7 +50,8 @@ angular.module('ngCsv.directives').
                             decimalSep: $scope.decimalSep ? $scope.decimalSep : '.',
                             quoteStrings: $scope.quoteStrings,
                             addByteOrderMarker: $scope.addByteOrderMarker,
-                            charset: $scope.charset
+                            charset: $scope.charset,
+                            encode: $scope.encode
                         };
                         if (angular.isDefined($attrs.csvHeader)) options.header = $scope.$eval($scope.header);
                         if (angular.isDefined($attrs.csvColumnOrder)) options.columnOrder = $scope.$eval($scope.columnOrder);
@@ -76,6 +78,7 @@ angular.module('ngCsv.directives').
                             $element.removeClass($attrs.ngCsvLoadingClass || 'ng-csv-loading');
                             deferred.resolve(csv);
                         });
+                        
                         $scope.$apply(); // Old angular support
                         
                         return deferred.promise;
